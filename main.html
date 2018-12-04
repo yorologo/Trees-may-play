@@ -23,7 +23,20 @@
 </head>
 
 <body>
-
+    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="titulo-emergente" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="titulo-emergente"></h4>
+                    <button type="button btn-danger" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="texto-emergente">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="card-header">
         <div class="clearfix">
             <div class="btn-group">
@@ -44,7 +57,7 @@
     </div>
     <div class="clearfix" style="margin-right:15px; margin-top: 7px;">
         <button onclick="action_water()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;"><img
-                src="Img/agua.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="fertilizer">0</a>
+                src="Img/agua.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="water">0</a>
         </button>
         <button onclick="action_fertilizer()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;"><img
                 src="Img/abono.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="fertilizer">0</a>
@@ -53,7 +66,7 @@
                 src="Img/coin.png" alt="Coins" class="img-fluid" style="max-width: 15%"> x <a id="coins">0</a> </button>
     </div>
     <div class="container text-center pt-5 mt-5">
-        <button onclick="click_arbol()" id="tree" type="button" class="btn btn-link">
+        <button onclick="click_arbol()" id="tree" type="button" class="btn btn-link" data-toggle="modal" data-target="#miModal">
             <img src="Img/tree_3.png" alt="Loading...">
         </button>
     </div>

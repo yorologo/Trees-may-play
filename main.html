@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="Fonts/8BitWonder.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
     <script type="text&javascript" src="js/bootstrap.js"></script>
@@ -17,6 +18,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/play.js"></script>
     <script src="js/main.js"></script>
 </head>
@@ -44,9 +46,14 @@
                     <img src="Img/menu-icon.png" alt="Menu" class="img-fluid" style="max-width: 60%">
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
+                    <audio class="dropdown-item" src="Sound/music.ogg" preload="auto" controls autoplay loop></audio>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
                     <div class="dropdown-item text-center" id="g-pay-button"></div>
-                    <form class="dropdown-item text-center" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                    <form class="dropdown-item text-center" action="https://www.paypal.com/cgi-bin/webscr" method="post"
+                        target="_top">
                         <input type="hidden" name="cmd" value="_donations" />
                         <input type="hidden" name="business" value="Y5T62U3VUSZS8" />
                         <input type="hidden" name="item_name" value="Apoya al planeta" />
@@ -56,24 +63,28 @@
                         <img alt="" border="0" src="https://www.paypal.com/en_MX/i/scr/pixel.gif" width="1" height="1" />
                     </form>
                     <div class="dropdown-divider"></div>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="login.html">Log Out</a>
                 </div>
             </div>
-            <button type="button" class="btn bg-primary btn-lg float-right" style="height: 50px; width: 50%">User</button>
+            <button type="button" class="btn bg-primary btn-lg float-right" style="height: 50px; width: 50%">Yorologo nivel:<a id="show-nivel">1</a></button>
         </div>
     </div>
     <div class="clearfix" style="margin-right:15px; margin-top: 7px;">
-        <button onclick="action_water()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;"><img
-                src="Img/agua.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="water">0</a>
+        <button onclick="useAgua()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;" data-toggle="modal"
+        data-target="#miModal"><img
+                src="Img/agua.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="water">10</a>
         </button>
-        <button onclick="action_fertilizer()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;"><img
-                src="Img/abono.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="fertilizer">0</a>
+        <button onclick="useFertilizante()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;" data-toggle="modal"
+        data-target="#miModal"><img
+                src="Img/abono.png" alt="Fertilizer" class="img-fluid" style="max-width: 15%"> x <a id="fertilizer">5</a>
         </button>
-        <button onclick="action_coins()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;"><img
-                src="Img/coin.png" alt="Coins" class="img-fluid" style="max-width: 15%"> x <a id="coins">0</a> </button>
+        <button onclick="action_coins()" type="button" class="btn btn-warning btn-sm float-right" style="min-width: 100px; max-width: 150px; height: 100; margin-left: 10px;""><img
+                src="Img/coin.png" alt="Coins" class="img-fluid" style="max-width: 15%"> x <a id="coins">20</a> </button>
     </div>
     <div class="container text-center pt-5 mt-5">
-        <button onclick="click_arbol()" id="tree" type="button" class="btn btn-link" data-toggle="modal" data-target="#miModal">
+        <button onclick="click_arbol()" id="tree" type="button" class="btn btn-link transform animated" data-toggle="modal"
+            data-target="#miModal">
             <img src="Img/tree_3.png" alt="Loading...">
         </button>
     </div>
@@ -261,10 +272,10 @@
          */
         function getGoogleTransactionInfo() {
             return {
-                currencyCode: 'USD',
+                currencyCode: 'MXN',
                 totalPriceStatus: 'FINAL',
                 // set to cart total
-                totalPrice: '1.00'
+                totalPrice: '10.00'
             };
         }
 
@@ -278,7 +289,7 @@
             // transactionInfo must be set but does not affect cache
             paymentDataRequest.transactionInfo = {
                 totalPriceStatus: 'NOT_CURRENTLY_KNOWN',
-                currencyCode: 'USD'
+                currencyCode: 'MXN'
             };
             const paymentsClient = getGooglePaymentsClient();
             paymentsClient.prefetchPaymentData(paymentDataRequest);

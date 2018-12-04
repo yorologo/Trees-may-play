@@ -9,8 +9,8 @@ var consejos = [
     'La tala de arboles puede provocar inundaciones, ya que se retira la barrera natural',
     'La educacion ambiental podria cambiar el mundo, es nustra decision informarnos para ayudar'
 ];
-
 var index = Math.floor((Math.random() * consejos.length));
+var nivel = 1;
 
 function action_coins() {
     var coins = parseInt(document.getElementById("coins").textContent);
@@ -26,55 +26,47 @@ function action_coins() {
 
 }
 
-function action_fertilizer() {
-    var coins = parseInt(document.getElementById("coins").textContent);
+// function action_fertilizer() {
+//     var coins = parseInt(document.getElementById("coins").textContent);
+//     var fertilizer = parseInt(document.getElementById("fertilizer").textContent);
+
+//     if (coins >= 10) {
+//         coins -= 10;
+//         fertilizer += 1;
+//         document.getElementById("coins").textContent = coins.toString();
+//         document.getElementById("fertilizer").textContent = fertilizer.toString();
+//     }
+//     else {
+//         alert("No tienes monedas suficientes");
+//     }
+
+// }
+
+// function action_water() {
+//     var coins = parseInt(document.getElementById("coins").textContent);
+//     var water = parseInt(document.getElementById("water").textContent);
+
+//     if (coins >= 2) {
+//         coins -= 2;
+//         water += 1;
+//         document.getElementById("coins").textContent = coins.toString();
+//         document.getElementById("water").textContent = water.toString();
+//     }
+//     else {
+//         alert("No tienes monedas suficientes");
+//     }
+// }
+
+function useFertilizante() {
     var fertilizer = parseInt(document.getElementById("fertilizer").textContent);
-
-    if (coins >= 10) {
-        coins -= 10;
-        fertilizer += 1;
-        document.getElementById("coins").textContent = coins.toString();
-        document.getElementById("fertilizer").textContent = fertilizer.toString();
-    }
-    else {
-        alert("No tienes monedas suficientes");
-    }
-
-}
-
-function action_water() {
-    var coins = parseInt(document.getElementById("coins").textContent);
-    var water = parseInt(document.getElementById("water").textContent);
-
-    if (coins >= 2) {
-        coins -= 2;
-        water += 1;
-        document.getElementById("coins").textContent = coins.toString();
-        document.getElementById("water").textContent = water.toString();
-    }
-    else {
-        alert("No tienes monedas suficientes");
-    }
-}
-
-function click_arbol() {
-    var fertilizer = parseInt(document.getElementById("fertilizer").textContent);
-    var water = parseInt(document.getElementById("water").textContent);
     var xp = parseInt(document.getElementById('xp').style.width);
 
-    if (fertilizer == 0 || water == 0) {
-        return alert("Recursos Insuficientes");
-    }
-
     if (fertilizer > 0) {
-        document.getElementById("titulo-emergente").innerHTML = "Consejo 🌳🎮";
-        document.getElementById("texto-emergente").innerHTML = consejos[index];
-
         fertilizer -= 1;
-        water -= 1;
         document.getElementById("fertilizer").textContent = fertilizer.toString();
-        document.getElementById("water").textContent = water.toString();
-        xp += 10;
+
+        xp += 30 / nivel;
+
         $("#xp")
             .css("width", xp + "%")
             .attr("aria-valuenow", xp);
@@ -83,10 +75,64 @@ function click_arbol() {
             $("#xp")
                 .css("width", xp + "%")
                 .attr("aria-valuenow", xp);
+            $('.animated').toggleClass('tada');
+            ++nivel;
+            document.getElementById("show-nivel").innerHTML = nivel;
+            document.getElementById("titulo-emergente").innerHTML = "NIVEL " + nivel;
+            document.getElementById("texto-emergente").innerHTML = "Haz subido de nivel</br>Sigue jugando y ayudanos a cuidar el medio ambiente";
+        }
+        else {
+            $('.animated').toggleClass('rubberBand');
+            document.getElementById("titulo-emergente").innerHTML = "Consejo 🌳🎮";
+            document.getElementById("texto-emergente").innerHTML = consejos[index];
         }
     }
     else {
-        document.getElementById("titulo-emergente").innerHTML = "Alerta";
-        document.getElementById("texto-emergente").innerHTML = "Recursos insuficientes";
+        return alert("Abonos Insuficientes");
     }
+
+}
+d
+function useAgua() {
+    var water = parseInt(document.getElementById("water").textContent);
+    var xp = parseInt(document.getElementById('xp').style.width);
+
+    if (water > 0) {
+        water -= 1;
+        document.getElementById("water").textContent = water.toString();
+
+        xp += 15 / nivel;
+
+        $("#xp")
+            .css("width", xp + "%")
+            .attr("aria-valuenow", xp);
+        if (xp > 100) {
+            xp = 0;
+            $("#xp")
+                .css("width", xp + "%")
+                .attr("aria-valuenow", xp);
+            $('.animated').toggleClass('tada');
+            ++nivel;
+            document.getElementById("show-nivel").innerHTML = nivel;
+            document.getElementById("titulo-emergente").innerHTML = "NIVEL " + nivel;
+            document.getElementById("texto-emergente").innerHTML = "Haz subido de nivel</br>Sigue jugando y ayudanos a cuidar el medio ambiente";
+        }
+        else {
+            $('.animated').toggleClass('rubberBand');
+            document.getElementById("titulo-emergente").innerHTML = "Consejo 🌳🎮";
+            document.getElementById("texto-emergente").innerHTML = consejos[index];
+        }
+    }
+    else {
+        return alert("Agua Insuficientes");
+    }
+}
+
+
+function click_arbol() {
+
+
+    $('.animated').toggleClass('rubberBand');
+    document.getElementById("titulo-emergente").innerHTML = "Consejo 🌳🎮";
+    document.getElementById("texto-emergente").innerHTML = consejos[index];
 }

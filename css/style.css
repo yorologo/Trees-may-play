@@ -1,0 +1,26 @@
+body, html {
+	font-family: "BitWonder" !important;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	background-image: url("../Img/fondo.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: darkcyan;
+	font-family: 8
+}
+
+.all-center {
+	min-height: 100%;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
+.form-heading {
+	color:#ff0000
+}
+.block1 {
+	background: #ffffffb0;
+}

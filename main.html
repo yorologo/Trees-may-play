@@ -17,7 +17,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="js/payment.js"></script>
     <script src="js/play.js"></script>
     <script src="js/main.js"></script>
 </head>
@@ -46,8 +45,16 @@
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Action</a>
-                    <div class="dropdown-item" id="g-pay-button"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-item text-center" id="g-pay-button"></div>
+                    <form class="dropdown-item text-center" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_donations" />
+                        <input type="hidden" name="business" value="Y5T62U3VUSZS8" />
+                        <input type="hidden" name="item_name" value="Apoya al planeta" />
+                        <input type="hidden" name="currency_code" value="MXN" />
+                        <input type="image" src="https://www.paypalobjects.com/en_US/MX/i/btn/btn_donateCC_LG.gif"
+                            border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                        <img alt="" border="0" src="https://www.paypal.com/en_MX/i/scr/pixel.gif" width="1" height="1" />
+                    </form>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="login.html">Log Out</a>
                 </div>
